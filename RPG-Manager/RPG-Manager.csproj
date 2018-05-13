@@ -51,6 +51,12 @@
     <Compile Include="CharacterCreator.Designer.cs">
       <DependentUpon>CharacterCreator.cs</DependentUpon>
     </Compile>
+    <Compile Include="DungeonViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DungeonViewer.Designer.cs">
+      <DependentUpon>DungeonViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Notification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Shared\Player.cs" />
     <EmbeddedResource Include="CharacterCreator.resx">
       <DependentUpon>CharacterCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DungeonViewer.resx">
+      <DependentUpon>DungeonViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainHost.resx">
       <DependentUpon>MainHost.cs</DependentUpon>
