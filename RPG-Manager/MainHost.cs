@@ -14,13 +14,14 @@ namespace RPG_Manager
 {
     public partial class MainHost : Form
     {
-        private bool isStarted;
+        private bool isStarted, isEnabled;
         private Game game;
 
         public MainHost()
         {
             InitializeComponent();
             isStarted = false;
+            isEnabled = false;
         }
 
         // Creates a new game.
@@ -47,8 +48,24 @@ namespace RPG_Manager
         // Opens the dialog to save the game to an xml file
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GameFolderBrowserDialog.Disposed += SaveGameFolderBrowserDialog_Disposed;
-            GameFolderBrowserDialog.ShowDialog();
+            if (gameNameText.Text != "" && isStarted)
+            {
+                GameFolderBrowserDialog.Disposed += SaveGameFolderBrowserDialog_Disposed;
+                GameFolderBrowserDialog.ShowDialog();
+            }
+            else
+            {
+                if (gameNameText.Text == "")
+                {
+                    Notification temp = new Notification("Please provide a name for your game!");
+                    temp.Show();
+                }
+                else
+                {
+                    Notification temp = new Notification("Please create a new game before saving!");
+                    temp.Show();
+                }
+            }
         }
 
         // saves the game to an xml file
@@ -220,6 +237,61 @@ namespace RPG_Manager
                 form.CompletionEvent += EnemyCharacterCreatorAddition_CompletionEvent;
                 form.Show();
             }
+        }
+
+        // Used for activating/deactivating the controls
+        private void CheckEnablebility(object sender, EventArgs e)
+        {
+            if (!isStarted && isEnabled)
+            {
+                gameNameText.Enabled = false;
+                gameNameText.ReadOnly = true;
+
+                playerListBox.Enabled = false;
+                playerListBox.SelectionMode = SelectionMode.None;
+
+                npcListBox.Enabled = false;
+                npcListBox.SelectionMode = SelectionMode.None;
+
+                enemyListBox.Enabled = false;
+                enemyListBox.SelectionMode = SelectionMode.None;
+
+                newGameWarningTextLabel.Visible = true;
+
+                gameNameText.Invalidate();
+                playerListBox.Invalidate();
+                npcListBox.Invalidate();
+                enemyListBox.Invalidate();
+                newGameWarningTextLabel.Invalidate();
+            }
+            else if (isStarted && !isEnabled)
+            {
+                gameNameText.Enabled = true;
+                gameNameText.ReadOnly = false;
+
+                playerListBox.Enabled = true;
+                playerListBox.SelectionMode = SelectionMode.One;
+
+                npcListBox.Enabled = true;
+                npcListBox.SelectionMode = SelectionMode.One;
+
+                enemyListBox.Enabled = true;
+                enemyListBox.SelectionMode = SelectionMode.One;
+
+                newGameWarningTextLabel.Visible = false;
+
+                gameNameText.Invalidate();
+                playerListBox.Invalidate();
+                npcListBox.Invalidate();
+                enemyListBox.Invalidate();
+                newGameWarningTextLabel.Invalidate();
+            }
+        }
+
+        // Used for activating/deactivating the controls
+        private void MainHost_Paint(object sender, PaintEventArgs e)
+        {
+            CheckEnablebility(this, new EventArgs());
         }
     }
 }

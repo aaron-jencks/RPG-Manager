@@ -74,6 +74,7 @@
             this.dungeonSizeText = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dungeonPositionText = new System.Windows.Forms.Label();
+            this.newGameWarningTextLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -237,27 +238,27 @@
             this.removeToolStripMenuItem,
             this.editToolStripMenuItem1});
             this.playersToolStripMenuItem.Name = "playersToolStripMenuItem";
-            this.playersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playersToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.playersToolStripMenuItem.Text = "Players";
             // 
             // addToolStripMenuItem3
             // 
             this.addToolStripMenuItem3.Name = "addToolStripMenuItem3";
-            this.addToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
             this.addToolStripMenuItem3.Text = "Add";
             this.addToolStripMenuItem3.Click += new System.EventHandler(this.addToolStripMenuItem3_Click);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.removeToolStripMenuItem.Text = "Remove";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem1
             // 
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.editToolStripMenuItem1.Text = "Edit";
             this.editToolStripMenuItem1.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
             // 
@@ -268,7 +269,7 @@
             this.removeToolStripMenuItem1,
             this.editToolStripMenuItem2});
             this.nPCsToolStripMenuItem.Name = "nPCsToolStripMenuItem";
-            this.nPCsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nPCsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.nPCsToolStripMenuItem.Text = "NPCs";
             // 
             // addToolStripMenuItem2
@@ -288,7 +289,7 @@
             // editToolStripMenuItem2
             // 
             this.editToolStripMenuItem2.Name = "editToolStripMenuItem2";
-            this.editToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
             this.editToolStripMenuItem2.Text = "Edit";
             this.editToolStripMenuItem2.Click += new System.EventHandler(this.editToolStripMenuItem2_Click);
             // 
@@ -299,7 +300,7 @@
             this.removeToolStripMenuItem2,
             this.editToolStripMenuItem3});
             this.enemiesToolStripMenuItem.Name = "enemiesToolStripMenuItem";
-            this.enemiesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.enemiesToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.enemiesToolStripMenuItem.Text = "Enemies";
             // 
             // addToolStripMenuItem1
@@ -319,7 +320,7 @@
             // editToolStripMenuItem3
             // 
             this.editToolStripMenuItem3.Name = "editToolStripMenuItem3";
-            this.editToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
             this.editToolStripMenuItem3.Text = "Edit";
             this.editToolStripMenuItem3.Click += new System.EventHandler(this.editToolStripMenuItem3_Click);
             // 
@@ -440,11 +441,21 @@
             this.dungeonPositionText.TabIndex = 12;
             this.dungeonPositionText.Text = "(0, 0)";
             // 
+            // newGameWarningTextLabel
+            // 
+            this.newGameWarningTextLabel.AutoSize = true;
+            this.newGameWarningTextLabel.Location = new System.Drawing.Point(141, 24);
+            this.newGameWarningTextLabel.Name = "newGameWarningTextLabel";
+            this.newGameWarningTextLabel.Size = new System.Drawing.Size(183, 13);
+            this.newGameWarningTextLabel.TabIndex = 13;
+            this.newGameWarningTextLabel.Text = "Select File>New to start a new game!";
+            // 
             // MainHost
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 321);
+            this.Controls.Add(this.newGameWarningTextLabel);
             this.Controls.Add(this.dungeonPositionText);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dungeonSizeText);
@@ -461,6 +472,9 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainHost";
             this.Text = "Overview";
+            this.Load += new System.EventHandler(this.CheckEnablebility);
+            this.Shown += new System.EventHandler(this.CheckEnablebility);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainHost_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -516,6 +530,7 @@
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem3;
+        private System.Windows.Forms.Label newGameWarningTextLabel;
     }
 }
 
