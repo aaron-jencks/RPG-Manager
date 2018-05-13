@@ -32,6 +32,25 @@ namespace RPG_Manager
             InitializeComponent();
         }
 
+        public PlayerCreator(Player player)
+        {
+            InitializeComponent();
+
+            // initializes the entry boxes to the previous values
+            characterNameText.Text = player.Name;
+            characterRaceText.Text = player.Race;
+            playerNameText.Text = player.PlayerName;
+            hpNumeric.Value = player.Hp;
+            acNumeric.Value = player.AC;
+
+            // invalidates all of the controls
+            characterNameText.Invalidate();
+            characterRaceText.Invalidate();
+            playerNameText.Invalidate();
+            hpNumeric.Invalidate();
+            acNumeric.Invalidate();
+        }
+
         private void acceptBtn_Click(object sender, EventArgs e)
         {
             OnCompletionEvent();

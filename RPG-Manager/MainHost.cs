@@ -173,5 +173,53 @@ namespace RPG_Manager
             game.Enemies.RemoveAt(enemyListBox.SelectedIndex);
             playerListBox.Items.RemoveAt(enemyListBox.SelectedIndex);
         }
+
+        // Allows editing of a selected player
+        private void editToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                PlayerCreator form = new PlayerCreator(game.Players[playerListBox.SelectedIndex]);  // Passes in the selected player object.
+
+                // Removes that player object from the lists
+                game.Players.RemoveAt(playerListBox.SelectedIndex);
+                playerListBox.Items.RemoveAt(playerListBox.SelectedIndex);
+
+                form.CompletionEvent += PlayerCreatorAddition_CompletionEvent;
+                form.Show();
+            }
+        }
+
+        // Allows editing of a selected npc
+        private void editToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                CharacterCreator form = new CharacterCreator(game.Npcs[npcListBox.SelectedIndex]);  // Passes in the selected npc object.
+
+                // Removes that npc object from the lists
+                game.Npcs.RemoveAt(npcListBox.SelectedIndex);
+                npcListBox.Items.RemoveAt(npcListBox.SelectedIndex);
+
+                form.CompletionEvent += NPCCharacterCreatorAddition_CompletionEvent;
+                form.Show();
+            }
+        }
+
+        // Allows editing of a selected enemy
+        private void editToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                CharacterCreator form = new CharacterCreator(game.Enemies[enemyListBox.SelectedIndex]); // Passes in the selected enemy object.
+
+                // Removes that enemy object from the lists
+                game.Enemies.RemoveAt(enemyListBox.SelectedIndex);
+                enemyListBox.Items.RemoveAt(enemyListBox.SelectedIndex);
+
+                form.CompletionEvent += EnemyCharacterCreatorAddition_CompletionEvent;
+                form.Show();
+            }
+        }
     }
 }
