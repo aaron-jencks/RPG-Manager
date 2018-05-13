@@ -12,12 +12,12 @@ using System.Xml.Linq;
 
 namespace RPG_Manager
 {
-    public partial class Form1 : Form
+    public partial class MainHost : Form
     {
         private bool isStarted;
         private Game game;
 
-        public Form1()
+        public MainHost()
         {
             InitializeComponent();
             isStarted = false;
@@ -71,7 +71,10 @@ namespace RPG_Manager
         // Adds a new player to the game
         private void PlayerCreatorAddition_CompletionEvent(object sender, CompletionEventArgs e)
         {
-            game.Players.Add((Player)e.CompletedData);
+            Player temp = (Player)e.CompletedData;
+            game.Players.Add(temp);
+            playerListBox.Items.Add(temp.PlayerName);
+            playerListBox.Invalidate();
         }
 
         // Exits the program
@@ -94,7 +97,10 @@ namespace RPG_Manager
         // Adds a new npc to the game
         private void NPCCharacterCreatorAddition_CompletionEvent(object sender, CompletionEventArgs e)
         {
-            game.Npcs.Add((Character)e.CompletedData);
+            Character temp = (Character)e.CompletedData;
+            game.Npcs.Add(temp);
+            npcListBox.Items.Add(temp.Name);
+            npcListBox.Invalidate();
         }
 
         // Opens the dialog for adding a new enemy to the game
@@ -111,7 +117,61 @@ namespace RPG_Manager
         // Adds a new enemy to the game
         private void EnemyCharacterCreatorAddition_CompletionEvent(object sender, CompletionEventArgs e)
         {
-            game.Enemies.Add((Character)e.CompletedData);
+            Character temp = (Character)e.CompletedData;
+            game.Enemies.Add(temp);
+            enemyListBox.Items.Add(temp.Name);
+            enemyListBox.Invalidate();
+        }
+
+        private void addToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                PlayerCreator form = new PlayerCreator();
+                form.CompletionEvent += PlayerCreatorAddition_CompletionEvent;
+                form.Show();
+            }
+        }
+
+        private void addToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                CharacterCreator form = new CharacterCreator();
+                form.CompletionEvent += NPCCharacterCreatorAddition_CompletionEvent;
+                form.Show();
+            }
+        }
+
+        private void addToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (isStarted)
+            {
+                CharacterCreator form = new CharacterCreator();
+                form.CompletionEvent += EnemyCharacterCreatorAddition_CompletionEvent;
+                form.Show();
+            }
+        }
+
+        // Removes a player from the game
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            game.Players.RemoveAt(playerListBox.SelectedIndex);
+            playerListBox.Items.RemoveAt(playerListBox.SelectedIndex);
+        }
+
+        // Removes a npc from the game
+        private void removeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            game.Npcs.RemoveAt(npcListBox.SelectedIndex);
+            playerListBox.Items.RemoveAt(npcListBox.SelectedIndex);
+        }
+
+        // Removes an enemy from the game
+        private void removeToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            game.Enemies.RemoveAt(enemyListBox.SelectedIndex);
+            playerListBox.Items.RemoveAt(enemyListBox.SelectedIndex);
         }
     }
 }

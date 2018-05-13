@@ -10,6 +10,7 @@ namespace RPG_Manager.Shared
 {
     public class Game
     {
+        private string name;
         private List<Player> players;
         private List<Character> npcs;
         private List<Character> enemies;
@@ -19,9 +20,11 @@ namespace RPG_Manager.Shared
         public List<Character> Npcs { get => npcs; set => npcs = value; }
         public List<Character> Enemies { get => enemies; set => enemies = value; }
         public Dungeon Dungeon { get => dungeon; set => dungeon = value; }
+        public string Name { get => name; set => name = value; }
 
-        public Game()
+        public Game(string name = "")
         {
+            this.name = name;
             players = new List<Player>();
             npcs = new List<Character>();
             enemies = new List<Character>();
@@ -33,6 +36,8 @@ namespace RPG_Manager.Shared
             players = new List<Player>();
             npcs = new List<Character>();
             enemies = new List<Character>();
+
+            name = element.XPathSelectElement("@Name").Value;
 
             // Loads player list
             foreach (XElement e in element.XPathSelectElements("Players/Character"))
@@ -52,7 +57,7 @@ namespace RPG_Manager.Shared
 
         public virtual XElement GenXml()
         {
-            XElement temp = new XElement("Game");
+            XElement temp = new XElement("Game", new XAttribute("Name", name));
 
             // converts player list
             XElement pTemp = new XElement("Players");
